@@ -2,8 +2,30 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+const MongoClient = require("mongodb").MongoClient;
+
+const bodyParser = require("body-parser");
+
+// Connection URL
+const url = "mongodb://localhost:27017";
+
+// Create a new MongoClient
+const client = new MongoClient(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+let db;
+
 app.set("view engine", "esj");
 app.use(express.urlencoded());
+
+//Bodyparser?
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 
 app.get("/", (req, res) => res.render("pages/index.ejs"));
 app.get("/signup", (req, res) => {
@@ -23,18 +45,6 @@ app.post("/signup", (req, res) => {
 app.listen(port, () => {
   console.log(`lyssnar på ${port}`);
 });
-
-const MongoClient = require("mongodb").MongoClient;
-
-// Connection URL
-const url = "mongodb://localhost:27017";
-
-// Create a new MongoClient
-const client = new MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-let db;
 
 client.connect(function(err) {
   if (err) throw err;
