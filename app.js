@@ -13,7 +13,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
 const MongoClient = require("mongodb").MongoClient;
 
 // beskriver vilken server mongodb kopplas till på localhost
-const url = "mongodb://localhost:27017";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 // Create a new MongoClient
 // client är en funktion som connectar till url som man sätter ovan
@@ -39,7 +39,7 @@ app.use(
 // collection "fake" i urlen man satt ovan
 client.connect(function(err) {
   if (err) throw err;
-  db = client.db("fake");
+  db = client.db("heroku_zpqdzr4k");
 });
 
 app.get("/", (req, res) => res.render("pages/index.ejs"));
