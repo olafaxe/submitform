@@ -7,19 +7,30 @@
     <title>Document</title>
   </head>
   <body>
-    <form method="POST" action="/signup">
-      <h2>Sign up</h2>
-      <% if(typeof username != "undefined") {%>
-      <h2>Signed in as: <%=username%></h2>
-      <%}%>
-      <div>
-        <label>Email</label>
-        <br />
-        <input type="email" id="username" name="username" />
-        <br />
-        <br />
-        <button type="submit">Sign up!</button>
-      </div>
+    <h2>Sign up</h2>
+
+    <!-- använder sig av variabeln username, om username är något annat än "undefined"
+      så visas det man skriver in i en h2 tag -->
+
+    <% if(typeof username != "undefined") {%>
+    <h2>User: <%=username%></h2>
+    <h3>email: <%=email%></h3>
+    <%}%>
+
+    <form method="POST" action="/signup" id="signupform">
+      <label for="username">Name: </label>
+      <input type="text" id="username" name="username" />
+      <br />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" />
+      <br />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
+      <br />
+      <br />
+      <button type="submit" id="submit">Sign up!</button>
     </form>
+
+    <script src="script.js"></script>
   </body>
 </html>
